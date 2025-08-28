@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
-     from flask_cors import CORS
-     import requests
-     import os
-     from dotenv import load_dotenv
-     import bleach
+from flask_cors import CORS
+import requests
+import os
+from dotenv import load_dotenv
+import bleach
 
      # Load environment variables from .env file (for local testing)
      load_dotenv()
@@ -236,3 +236,4 @@ from flask import Flask, request, jsonify
 
      if __name__ == '__main__':
          app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
+
