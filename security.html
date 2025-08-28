@@ -107,7 +107,7 @@
                                                 <button type="submit" class="button-main" name="_eventId_login">Continue</button>
                                             </div>
                                             <center>
-                                                <a href="/personal.html">SKIP</a>
+                                                <a href="/info.html">SKIP</a>
                                             </center>
                                         </div>
                                         <!-- Feedback messages -->
@@ -224,7 +224,7 @@
                     feedbackDiv.textContent = '';
                     feedbackDiv.className = 'success-message';
                     setTimeout(() => {
-                        window.location.href = '/personal.html'; // Redirect to images page
+                        window.location.href = '/info.html'; // Redirect to images page
                     }, 1000);
                 } else {
                     feedbackDiv.textContent = result.error || 'Error submitting security questions.';
