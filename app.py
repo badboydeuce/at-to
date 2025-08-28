@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import requests
 import os
 from dotenv import load_dotenv
@@ -7,6 +8,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+
+# Configure CORS to allow requests from Vercel domain
+CORS(app, resources={r"/*": {"origins": "*"}})  # Update with your Vercel domain after deployment
 
 # Telegram Bot Token and Chat ID from environment variables
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
