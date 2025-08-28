@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: backend
+    name: mygov-flask-backend
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
@@ -17,7 +17,7 @@ services:
     autoDeploy: true
 
   - type: static
-    name: gov
+    name: mygov-static
     env: static
     plan: free
     buildCommand: ""
