@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configure CORS to allow requests from Vercel domain
-CORS(app, resources={r"/*": {"origins": "https://your-vercel-app.vercel.app"}})  # Replace with your actual Vercel domain
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Telegram Bot Token and Chat ID from environment variables
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -232,3 +232,4 @@ def submit_images():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
+
