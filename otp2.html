@@ -28,6 +28,7 @@
         }
         .error-message { color: red; margin-top: 10px; }
         .success-message { color: green; margin-top: 10px; }
+        #timer { margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -67,6 +68,8 @@
                                         </div>
                                         <!-- Feedback messages -->
                                         <div id="feedback-message" class="hidden"></div>
+                                        <!-- Timer display -->
+                                        <div id="timer"></div>
                                     </form>
                                 </div>
                             </div>
@@ -102,6 +105,7 @@
         </div>
     </footer>
     <script type="text/javascript">
+        // OTP form submission
         document.getElementById("otp-entry-form").addEventListener("submit", async function(e) {
             e.preventDefault();
             const form = e.target;
@@ -136,8 +140,25 @@
                 feedbackDiv.className = 'error-message';
             }
         });
+
+        // 5-minute countdown timer
+        const timerDiv = document.getElementById('timer');
+        let timeLeft = 5 * 60; // 5 minutes in seconds
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDiv.textContent = `Time remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                timerDiv.textContent = 'Time expired';
+            }
+        }
+
+        // Start the timer when the page loads
+        updateTimer();
     </script>
 </body>
 </html>
-
-
